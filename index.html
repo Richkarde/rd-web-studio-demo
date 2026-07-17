@@ -3,570 +3,400 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RD Web Studio — Websites for businesses that mean it</title>
-<meta name="description" content="RD Web Studio builds fast, custom websites for small businesses. Design, build, hosting, and support — all handled.">
+<title>RD Design Co. — Websites for businesses that mean it</title>
+<meta name="description" content="RD Design Co. builds custom websites for small businesses. $500 build, $20/month hosting and support — no contracts.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0B0E14;
-    --ink-soft:#12161f;
-    --paper:#F5F2EA;
-    --paper-dim:#e9e4d6;
-    --brass:#C9962E;
-    --brass-bright:#E4B455;
-    --teal:#2B5555;
-    --mist:#9AA5AD;
-    --line: rgba(245,242,234,0.12);
-    --radius: 14px;
+    --bg:#FAFAF8; --ink:#111111; --ink-soft:#5a5a56; --mist:#8f8f89;
+    --line:#DEDED8; --accent:#28422F; --accent-bright:#3A5C43;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
-    background:var(--ink);
-    color:var(--paper);
-    font-family:'Inter',sans-serif;
-    line-height:1.6;
+    background:var(--bg); color:var(--ink);
+    font-family:'Inter',sans-serif; line-height:1.65; font-size:15.5px;
     -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
   }
-  ::selection{ background:var(--brass); color:var(--ink); }
+  ::selection{ background:var(--accent); color:#fff; }
   a{color:inherit;text-decoration:none;}
-  img{max-width:100%;display:block;}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
-  .eyebrow{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12.5px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--brass);
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .eyebrow::before{
-    content:"";
-    width:20px;height:1px;
-    background:var(--brass);
-    display:inline-block;
-  }
-  h1,h2,h3{
-    font-family:'Fraunces',serif;
-    font-weight:600;
-    letter-spacing:-0.01em;
-  }
-  :focus-visible{ outline:2px solid var(--brass); outline-offset:3px; }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  h1,h2,h3{ font-family:'Fraunces',serif; font-weight:500; letter-spacing:-0.01em; }
+  .mono{ font-family:'IBM Plex Mono',monospace; }
+  .container{ max-width:1240px; margin:0 auto; padding:0 48px; }
 
   header{
     position:fixed; top:0; left:0; right:0; z-index:200;
-    background:rgba(11,14,20,0.78);
-    backdrop-filter:blur(14px);
+    background:rgba(250,250,248,0.9); backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
-  nav{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:20px 32px; max-width:1180px; margin:0 auto;
-  }
-  .logo{
-    font-family:'Fraunces',serif; font-weight:600; font-size:19px;
-    letter-spacing:-0.01em;
-  }
-  .logo em{ font-style:normal; color:var(--brass); }
-  .nav-links{ display:flex; gap:36px; align-items:center; }
-  .nav-links a{
-    font-size:14.5px; color:var(--mist); transition:color .2s;
-  }
-  .nav-links a:hover{ color:var(--paper); }
-  .nav-cta{
-    background:var(--brass); color:var(--ink); padding:10px 20px;
-    border-radius:100px; font-weight:600; font-size:14px;
-  }
-  .nav-cta:hover{ background:var(--brass-bright); }
-  .menu-btn{ display:none; background:none; border:none; color:var(--paper); font-size:24px; cursor:pointer; }
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:20px 48px; max-width:1240px; margin:0 auto; }
+  .logo{ display:flex; align-items:baseline; gap:8px; }
+  .logo .mark{ font-family:'Fraunces',serif; font-size:19px; font-weight:600; background:var(--ink); color:var(--bg); width:30px; height:30px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; }
+  .logo .full{ font-family:'Fraunces',serif; font-size:16px; font-weight:500; color:var(--ink-soft); }
+  .nav-links{ display:flex; gap:38px; align-items:center; }
+  .nav-links a{ font-size:13px; color:var(--ink-soft); letter-spacing:0.01em; }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-links .cta{ color:var(--accent); font-weight:600; }
+  .menu-btn{ display:none; background:none; border:1px solid var(--line); border-radius:6px; padding:6px 12px; font-size:12px; }
 
-  .hero{
-    min-height:100vh;
-    display:flex; align-items:center;
-    padding:150px 0 90px;
+  .hero{ padding:190px 0 110px; }
+  .hero-label{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--mist); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:22px; }
+  .hero h1{ font-size:clamp(38px,4.6vw,64px); line-height:1.06; max-width:820px; font-weight:500; }
+  .hero-meta{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-top:60px; }
+  .hero-meta div{ background:var(--bg); padding:24px 0 0; }
+  .hero-meta .num{ font-family:'Fraunces',serif; font-size:28px; }
+  .hero-meta .label{ font-size:12px; color:var(--ink-soft); margin-top:6px; padding-bottom:24px; }
+  .btn-row{ display:flex; gap:14px; margin-top:44px; flex-wrap:wrap; }
+  .btn{ padding:13px 26px; font-size:14px; font-weight:600; border:1px solid var(--ink); display:inline-flex; align-items:center; gap:8px; transition:all .18s; }
+  .btn-primary{ background:var(--ink); color:var(--bg); }
+  .btn-primary:hover{ background:var(--accent); border-color:var(--accent); }
+  .btn-ghost{ background:transparent; color:var(--ink); }
+  .btn-ghost:hover{ border-color:var(--accent); color:var(--accent); }
+
+  .sec{ padding:90px 0; border-top:1px solid var(--line); }
+  .sec-head{ display:grid; grid-template-columns:200px 1fr; gap:40px; margin-bottom:56px; }
+  .sec-index{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--accent); }
+  .sec-head h2{ font-size:clamp(26px,2.8vw,36px); max-width:560px; }
+  .sec-head p{ color:var(--ink-soft); font-size:14.5px; margin-top:14px; max-width:460px; }
+
+  .idx-list{ display:grid; grid-template-columns:200px 1fr; }
+  .idx-row{ display:contents; }
+  .idx-row > div{ padding:26px 0; border-bottom:1px solid var(--line); }
+  .idx-row .n{ font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--mist); }
+  .idx-row .content{ display:flex; justify-content:space-between; gap:30px; align-items:baseline; flex-wrap:wrap; }
+  .idx-row h3{ font-size:19px; font-weight:500; }
+  .idx-row p{ color:var(--ink-soft); font-size:14px; max-width:440px; }
+
+  .work-list{ display:flex; flex-direction:column; }
+  .work-row{ display:grid; grid-template-columns:60px 1fr auto; gap:24px; align-items:center; padding:30px 0; border-bottom:1px solid var(--line); transition:padding-left .2s, background .2s; }
+  .work-row:hover{ padding-left:14px; background:rgba(40,66,47,0.03); }
+  .work-row .n{ font-family:'IBM Plex Mono',monospace; color:var(--mist); font-size:13px; }
+  .work-row h3{ font-size:21px; font-weight:500; }
+  .work-row .cat{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:0.06em; display:block; margin-top:4px; }
+  .work-row .arrow{ font-size:20px; opacity:0.3; transition:opacity .2s, transform .2s; }
+  .work-row:hover .arrow{ opacity:1; transform:translateX(4px); color:var(--accent); }
+
+  /* ===== LIQUID GLASS — template preview section ===== */
+  .glass-stage{
+    background:linear-gradient(150deg, #EDEAE0, #F7F5EE 55%, #E7E9E2);
+    border-radius:24px; padding:56px 44px; position:relative; overflow:hidden;
+  }
+  .glass-stage::before, .glass-stage::after{
+    content:""; position:absolute; border-radius:50%; filter:blur(60px); opacity:0.5; pointer-events:none;
+  }
+  .glass-stage::before{ width:260px; height:260px; background:radial-gradient(circle, #C9D8C9, transparent 70%); top:-60px; left:-40px; }
+  .glass-stage::after{ width:220px; height:220px; background:radial-gradient(circle, #D9C9A8, transparent 70%); bottom:-50px; right:-30px; }
+  .template-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; position:relative; }
+  .template-card{
+    background:rgba(255,255,255,0.42);
+    backdrop-filter:blur(18px) saturate(160%);
+    -webkit-backdrop-filter:blur(18px) saturate(160%);
+    border:1px solid rgba(255,255,255,0.6);
+    border-radius:18px;
+    box-shadow:0 1px 1px rgba(255,255,255,0.7) inset, 0 12px 40px -18px rgba(20,20,20,0.25);
+    padding:22px; display:flex; flex-direction:column; gap:16px;
+    transition:transform .25s, box-shadow .25s;
     position:relative;
-    background:
-      radial-gradient(ellipse 800px 500px at 15% -10%, rgba(43,85,85,0.35), transparent 60%),
-      radial-gradient(ellipse 600px 400px at 90% 15%, rgba(201,150,46,0.12), transparent 60%);
   }
-  .hero-grid{
-    display:grid; grid-template-columns:1.05fr 0.95fr; gap:60px; align-items:center;
+  .template-card:hover{ transform:translateY(-4px); box-shadow:0 1px 1px rgba(255,255,255,0.8) inset, 0 22px 50px -18px rgba(20,20,20,0.32); }
+  .template-preview{
+    height:130px; border-radius:12px; padding:16px;
+    background:rgba(255,255,255,0.55); border:1px solid rgba(255,255,255,0.7);
+    display:flex; flex-direction:column; gap:8px; justify-content:center;
   }
-  .hero h1{
-    font-size:clamp(38px,4.6vw,64px);
-    line-height:1.04;
-    margin:22px 0 24px;
+  .template-preview .bar{ height:8px; border-radius:4px; background:rgba(17,17,17,0.12); }
+  .template-preview .bar.title{ width:70%; height:14px; background:var(--accent); opacity:0.55; }
+  .template-preview .bar.w1{ width:90%; } .template-preview .bar.w2{ width:75%; }
+  .template-card h3{ font-size:17px; font-weight:600; font-family:'Fraunces',serif; }
+  .template-card p{ font-size:13px; color:var(--ink-soft); }
+  .template-actions{ display:flex; gap:10px; margin-top:auto; }
+  .glass-btn{
+    flex:1; text-align:center; padding:10px 12px; border-radius:100px; font-size:12.5px; font-weight:600;
+    border:1px solid rgba(17,17,17,0.14); background:rgba(255,255,255,0.5); cursor:pointer;
+    transition:background .2s, border-color .2s, transform .15s;
   }
-  .hero h1 .accent{ color:var(--brass); font-style:italic; font-weight:500; }
-  .hero p{
-    font-size:17.5px; color:var(--mist); max-width:460px; margin-bottom:34px;
+  .glass-btn.yes{ background:rgba(40,66,47,0.9); color:#fff; border-color:var(--accent); }
+  .glass-btn.yes:hover{ background:var(--accent-bright); transform:translateY(-1px); }
+  .glass-btn.no{ color:var(--ink-soft); }
+  .glass-btn.no:hover{ background:rgba(255,255,255,0.8); }
+  .template-status{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--accent); text-align:center;
+    height:14px; opacity:0; transition:opacity .2s;
   }
-  .btn-row{ display:flex; gap:14px; flex-wrap:wrap; }
-  .btn{
-    padding:15px 28px; border-radius:100px; font-weight:600; font-size:15px;
-    display:inline-flex; align-items:center; gap:8px; transition:transform .15s, background .2s;
-  }
-  .btn-primary{ background:var(--brass); color:var(--ink); }
-  .btn-primary:hover{ background:var(--brass-bright); transform:translateY(-1px); }
-  .btn-ghost{ border:1px solid var(--line); color:var(--paper); }
-  .btn-ghost:hover{ border-color:var(--brass); color:var(--brass); }
+  .template-status.show{ opacity:1; }
+  @media (max-width:820px){ .template-grid{ grid-template-columns:1fr; } .glass-stage{ padding:32px 22px; } }
 
-  .mock{
-    background:var(--ink-soft);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    overflow:hidden;
-    box-shadow:0 40px 80px -30px rgba(0,0,0,0.6);
-  }
-  .mock-bar{
-    display:flex; align-items:center; gap:8px;
-    padding:12px 16px; border-bottom:1px solid var(--line);
-    background:rgba(255,255,255,0.02);
-  }
-  .mock-dot{ width:9px;height:9px;border-radius:50%; background:rgba(245,242,234,0.18); }
-  .mock-url{
-    margin-left:10px; font-family:'IBM Plex Mono',monospace; font-size:11.5px;
-    color:var(--mist); background:rgba(255,255,255,0.03);
-    padding:4px 10px; border-radius:6px; flex:1;
-  }
-  .mock-body{ padding:26px; min-height:280px; position:relative; }
-  .mock-line{
-    height:10px; border-radius:4px; background:rgba(245,242,234,0.08);
-    margin-bottom:12px; opacity:0; transform:translateY(6px);
-    animation:reveal 0.5s ease forwards;
-  }
-  .mock-line.title{ height:20px; width:70%; background:var(--brass); opacity:0.85; animation-delay:0.1s; }
-  .mock-line.w1{ width:95%; animation-delay:0.3s; }
-  .mock-line.w2{ width:80%; animation-delay:0.42s; }
-  .mock-line.w3{ width:88%; animation-delay:0.54s; }
-  .mock-block{ display:flex; gap:14px; margin-top:20px; }
-  .mock-card{
-    flex:1; height:70px; border-radius:8px; background:rgba(43,85,85,0.35);
-    border:1px solid rgba(245,242,234,0.06);
-    opacity:0; transform:translateY(8px);
-    animation:reveal .5s ease forwards;
-  }
-  .mock-card:nth-child(1){ animation-delay:0.68s; }
-  .mock-card:nth-child(2){ animation-delay:0.78s; }
-  .mock-card:nth-child(3){ animation-delay:0.88s; }
-  @keyframes reveal{ to{ opacity:1; transform:translateY(0);} }
-  @media (prefers-reduced-motion: reduce){
-    .mock-line, .mock-card{ animation:none !important; opacity:1 !important; transform:none !important; }
-  }
+  .review{ display:grid; grid-template-columns:200px 1fr; gap:40px; }
+  .review blockquote{ font-family:'Fraunces',serif; font-size:clamp(20px,2.4vw,28px); font-weight:500; line-height:1.4; font-style:italic; max-width:640px; }
+  .review .who{ margin-top:20px; font-size:13px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; }
 
-  .trust{
-    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-    padding:26px 0; background:var(--ink-soft);
-  }
-  .trust .wrap{
-    display:flex; flex-wrap:wrap; gap:14px 40px; justify-content:space-between; align-items:center;
-  }
-  .trust-item{ display:flex; align-items:center; gap:10px; font-size:14px; color:var(--mist); }
-  .trust-item strong{ color:var(--paper); font-family:'IBM Plex Mono',monospace; font-size:15px; }
+  .spec{ display:grid; grid-template-columns:200px 1fr; gap:40px; }
+  .spec-row{ display:grid; grid-template-columns:1fr auto auto; gap:24px; align-items:center; padding:28px 0; border-bottom:1px solid var(--line); }
+  .spec-row:first-child{ border-top:1px solid var(--ink); }
+  .spec-row h3{ font-size:19px; font-weight:500; }
+  .spec-row .desc{ color:var(--ink-soft); font-size:13.5px; margin-top:5px; max-width:400px; }
+  .spec-row .price{ font-family:'IBM Plex Mono',monospace; font-size:22px; white-space:nowrap; }
+  .spec-row .price span{ font-size:12px; color:var(--ink-soft); }
+  @media (max-width:760px){ .spec-row{ grid-template-columns:1fr; gap:10px; } }
 
-  section{ padding:110px 0; }
-  .section-head{ max-width:640px; margin-bottom:60px; }
-  .section-head h2{ font-size:clamp(28px,3.4vw,42px); margin-top:14px; }
-  .section-head p{ color:var(--mist); margin-top:16px; font-size:16.5px; }
+  .intake{ display:grid; grid-template-columns:200px 1fr; gap:40px; }
+  .intake-copy p{ color:var(--ink-soft); font-size:14.5px; max-width:340px; margin-top:14px; }
+  form{ display:grid; grid-template-columns:1fr 1fr; gap:28px 40px; max-width:760px; }
+  .field{ border-bottom:1px solid var(--line); padding-bottom:10px; }
+  .field.full{ grid-column:1/-1; }
+  .field label{ font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--mist); display:block; margin-bottom:8px; }
+  .field input, .field textarea, .field select{ width:100%; border:none; background:transparent; font-size:15.5px; color:var(--ink); font-family:'Inter',sans-serif; }
+  .field select{ appearance:none; cursor:pointer; }
+  .field input:focus, .field textarea:focus, .field select:focus{ outline:none; }
+  .field textarea{ resize:vertical; min-height:50px; }
+  form .btn{ grid-column:1/-1; justify-self:start; margin-top:8px; cursor:pointer; }
+  .form-note{ grid-column:1/-1; font-size:12px; color:var(--mist); }
+  @media (max-width:760px){ .sec-head,.review,.spec,.intake{ grid-template-columns:1fr; } form{ grid-template-columns:1fr; } }
 
-  .services-grid{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:2px;
-    background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
-  }
-  .service{ background:var(--ink); padding:34px 30px; transition:background .25s; }
-  .service:hover{ background:var(--ink-soft); }
-  .service .num{ font-family:'IBM Plex Mono',monospace; color:var(--brass); font-size:13px; }
-  .service h3{ font-size:21px; margin:16px 0 10px; font-weight:600; }
-  .service p{ color:var(--mist); font-size:15px; }
+  footer{ border-top:1px solid var(--line); padding:36px 0; }
+  .footer-row{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; font-size:13px; color:var(--ink-soft); }
+  .footer-row a:hover{ color:var(--accent); }
 
-  .process-list{ display:flex; flex-direction:column; }
-  .process-item{
-    display:grid; grid-template-columns:90px 1fr 1fr; gap:24px;
-    padding:34px 0; border-top:1px solid var(--line); align-items:start;
-  }
-  .process-item:last-child{ border-bottom:1px solid var(--line); }
-  .process-num{ font-family:'Fraunces',serif; font-size:34px; color:var(--brass); opacity:0.55; }
-  .process-item h3{ font-size:20px; }
-  .process-item p{ color:var(--mist); font-size:15px; }
-
-  .work-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:26px; }
-  .work-card{ border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--ink-soft); }
-  .work-thumb{
-    height:210px; display:flex; align-items:center; justify-content:center;
-    font-family:'Fraunces',serif; font-size:26px; color:rgba(245,242,234,0.35);
-    position:relative; overflow:hidden;
-  }
-  .work-thumb::after{
-    content:""; position:absolute; inset:0;
-    background:linear-gradient(135deg, rgba(43,85,85,0.5), rgba(201,150,46,0.15));
-  }
-  .work-thumb span{ position:relative; z-index:1; }
-  .work-info{ padding:22px 24px; }
-  .work-info .tag{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--brass); text-transform:uppercase; letter-spacing:0.08em; }
-  .work-info h3{ font-size:19px; margin:10px 0 6px; }
-  .work-info p{ color:var(--mist); font-size:14.5px; }
-
-  .pricing-wrap{ background:var(--paper); color:var(--ink); border-radius:24px; padding:70px 60px; }
-  .pricing-wrap .section-head p{ color:#5b564a; }
-  .pricing-wrap .eyebrow{ color:var(--teal); }
-  .pricing-wrap .eyebrow::before{ background:var(--teal); }
-  .price-grid{ display:grid; grid-template-columns:1fr 1fr; gap:30px; }
-  .price-card{ border:1px solid rgba(11,14,20,0.12); border-radius:16px; padding:36px; background:#fff; }
-  .price-card.featured{ border:2px solid var(--brass); position:relative; }
-  .price-card .badge{
-    position:absolute; top:-13px; left:32px; background:var(--brass); color:var(--ink);
-    font-family:'IBM Plex Mono',monospace; font-size:11px; padding:4px 12px; border-radius:100px; font-weight:600;
-  }
-  .price-card h3{ font-size:20px; color:#1c1c1c; }
-  .price-amount{ font-family:'Fraunces',serif; font-size:44px; margin:16px 0 4px; }
-  .price-amount span{ font-size:16px; font-family:'Inter',sans-serif; color:#7a7568; }
-  .price-card ul{ list-style:none; margin:24px 0 28px; }
-  .price-card li{ padding:8px 0; font-size:14.5px; color:#4a463c; display:flex; gap:10px; }
-  .price-card li::before{ content:"—"; color:var(--brass); flex-shrink:0; }
-  .price-card .btn-primary{ width:100%; justify-content:center; }
-
-  .contact{ background:var(--ink-soft); border-top:1px solid var(--line); }
-  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start; }
-  .contact h2{ font-size:clamp(30px,3.6vw,46px); }
-  .contact p.lead{ color:var(--mist); margin:18px 0 30px; max-width:440px; }
-  .contact-detail{ margin-bottom:20px; }
-  .contact-detail .label{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--brass); text-transform:uppercase; letter-spacing:0.08em; display:block; margin-bottom:6px; }
-  .contact-detail a, .contact-detail span{ font-size:17px; }
-  .contact-detail a:hover{ color:var(--brass); }
-
-  form{ display:flex; flex-direction:column; gap:16px; }
-  .field label{ display:block; font-size:13px; color:var(--mist); margin-bottom:7px; }
-  .field input, .field textarea{
-    width:100%; background:var(--ink); border:1px solid var(--line); border-radius:10px;
-    padding:13px 16px; color:var(--paper); font-family:'Inter',sans-serif; font-size:15px;
-  }
-  .field input:focus, .field textarea:focus{ outline:none; border-color:var(--brass); }
-  .field textarea{ resize:vertical; min-height:110px; }
-  form .btn-primary{ align-self:flex-start; margin-top:6px; border:none; cursor:pointer; font-family:inherit; }
-  .form-note{ font-size:12.5px; color:var(--mist); margin-top:4px; }
-
-  footer{ padding:44px 0; }
-  .footer-row{
-    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
-    font-size:13.5px; color:var(--mist);
-  }
-  .footer-row a:hover{ color:var(--brass); }
-
-  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
   .reveal.in{ opacity:1; transform:translateY(0); }
   @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
-
-  @media (max-width: 900px){
-    .hero-grid{ grid-template-columns:1fr; }
-    .services-grid{ grid-template-columns:1fr; }
-    .work-grid{ grid-template-columns:1fr; }
-    .price-grid{ grid-template-columns:1fr; }
-    .contact-grid{ grid-template-columns:1fr; gap:44px; }
-    .process-item{ grid-template-columns:50px 1fr; }
-    .process-item p{ grid-column:2; }
-    .pricing-wrap{ padding:44px 26px; }
-  }
-  @media (max-width: 720px){
-    .nav-links{ display:none; }
-    .menu-btn{ display:block; }
-  }
+  @media (max-width:720px){ .nav-links{ display:none; } .menu-btn{ display:block; } }
 </style>
 </head>
 <body>
 
 <header>
   <nav>
-    <a href="#top" class="logo">RD <em>Web Studio</em></a>
+    <a href="#top" class="logo"><span class="mark">RD</span><span class="full">Design Co.</span></a>
     <div class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#process">Process</a>
       <a href="#work">Work</a>
+      <a href="#templates">Preview a template</a>
       <a href="#pricing">Pricing</a>
-      <a href="#contact" class="nav-cta">Start a project</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#start" class="cta">Get a quote →</a>
     </div>
-    <button class="menu-btn" aria-label="Menu">☰</button>
+    <button class="menu-btn">Menu</button>
   </nav>
 </header>
 
 <section class="hero" id="top">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="eyebrow">Design & development studio</div>
-      <h1>Websites that make small businesses look <span class="accent">impossible to ignore.</span></h1>
-      <p>I design, build, and maintain fast, custom websites for businesses that are done looking like everyone else. No templates. No bloated builders. Just a site that works as hard as you do.</p>
-      <div class="btn-row">
-        <a href="#contact" class="btn btn-primary">Start a project →</a>
-        <a href="#work" class="btn btn-ghost">See the work</a>
+  <div class="container">
+    <div class="hero-label">Design & development studio — founded 2026, based in the United States</div>
+    <h1>We build websites for small businesses that are done looking like everyone else.</h1>
+    <div class="btn-row">
+      <a href="#templates" class="btn btn-primary">Preview a template →</a>
+      <a href="#work" class="btn btn-ghost">View selected work</a>
+    </div>
+    <div class="hero-meta">
+      <div><div class="num mono">$500</div><div class="label">Flat build fee, no hidden costs</div></div>
+      <div><div class="num mono">$20</div><div class="label">Monthly hosting & support</div></div>
+      <div><div class="num mono">5–7</div><div class="label">Days from kickoff to launch</div></div>
+      <div><div class="num mono">01</div><div class="label">Designer — no outsourcing, ever</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="services">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-index mono">01 — Services</div>
+      <div>
+        <h2>Everything your business needs to show up online, done right.</h2>
+        <p>Every project is built by hand — no drag-and-drop templates, no recycled themes.</p>
       </div>
     </div>
-    <div class="mock">
-      <div class="mock-bar">
-        <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
-        <span class="mock-url">yourbusiness.com</span>
+    <div class="idx-list reveal">
+      <div class="idx-row"><div class="n">01</div><div class="content"><h3>Custom Design</h3><p>Built around your brand and your customers, not a template with your logo dropped in.</p></div></div>
+      <div class="idx-row"><div class="n">02</div><div class="content"><h3>Development</h3><p>Hand-coded, fast-loading pages that work perfectly on any device.</p></div></div>
+      <div class="idx-row"><div class="n">03</div><div class="content"><h3>Hosting & Domain</h3><p>Domain connection, hosting, and SSL — handled for you, start to finish.</p></div></div>
+      <div class="idx-row"><div class="n">04</div><div class="content"><h3>Ongoing Support</h3><p>Copy changes and small updates are included, not billed hourly.</p></div></div>
+      <div class="idx-row"><div class="n">05</div><div class="content"><h3>SEO Basics</h3><p>Pages structured so Google can actually find and understand your business.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="work">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-index mono">02 — Work</div>
+      <div>
+        <h2>A closer look at what gets built.</h2>
+        <p>Examples of the kind of sites I design for local and small businesses.</p>
       </div>
-      <div class="mock-body">
-        <div class="mock-line title"></div>
-        <div class="mock-line w1"></div>
-        <div class="mock-line w2"></div>
-        <div class="mock-line w3"></div>
-        <div class="mock-block">
-          <div class="mock-card"></div>
-          <div class="mock-card"></div>
-          <div class="mock-card"></div>
+    </div>
+    <div class="work-list reveal">
+      <a href="#" class="work-row"><span class="n">01</span><div><h3>Booking-first landing page</h3><span class="cat">Barbershop — local service</span></div><span class="arrow">→</span></a>
+      <a href="#" class="work-row"><span class="n">02</span><div><h3>Quote request funnel</h3><span class="cat">Cleaning Co. — home services</span></div><span class="arrow">→</span></a>
+      <a href="#" class="work-row"><span class="n">03</span><div><h3>Menu & location page</h3><span class="cat">Café — food & beverage</span></div><span class="arrow">→</span></a>
+      <a href="#" class="work-row"><span class="n">04</span><div><h3>Portfolio & inquiry site</h3><span class="cat">Studio — creative</span></div><span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="templates">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-index mono">03 — Preview a template</div>
+      <div>
+        <h2>Not sure what you want yet? Look through a few directions.</h2>
+        <p>Pick the style closest to what you're picturing — it'll help kick off your quote request already pointed the right way.</p>
+      </div>
+    </div>
+    <div class="glass-stage reveal">
+      <div class="template-grid">
+        <div class="template-card">
+          <div class="template-preview">
+            <div class="bar title"></div><div class="bar w1"></div><div class="bar w2"></div>
+          </div>
+          <h3>Minimal & Editorial</h3>
+          <p>Clean type, lots of whitespace, restrained color. Feels premium and confident.</p>
+          <div class="template-actions">
+            <button class="glass-btn yes" data-style="Minimal & Editorial">Yes, I like this</button>
+            <button class="glass-btn no" data-style="Minimal & Editorial">Not quite</button>
+          </div>
+          <div class="template-status mono"></div>
+        </div>
+        <div class="template-card">
+          <div class="template-preview">
+            <div class="bar title"></div><div class="bar w1"></div><div class="bar w2"></div>
+          </div>
+          <h3>Bold & Modern</h3>
+          <p>Dark background, strong contrast, animated details. Feels current and energetic.</p>
+          <div class="template-actions">
+            <button class="glass-btn yes" data-style="Bold & Modern">Yes, I like this</button>
+            <button class="glass-btn no" data-style="Bold & Modern">Not quite</button>
+          </div>
+          <div class="template-status mono"></div>
+        </div>
+        <div class="template-card">
+          <div class="template-preview">
+            <div class="bar title"></div><div class="bar w1"></div><div class="bar w2"></div>
+          </div>
+          <h3>Warm & Classic</h3>
+          <p>Soft colors, serif type, approachable feel. Good fit for local, service-based businesses.</p>
+          <div class="template-actions">
+            <button class="glass-btn yes" data-style="Warm & Classic">Yes, I like this</button>
+            <button class="glass-btn no" data-style="Warm & Classic">Not quite</button>
+          </div>
+          <div class="template-status mono"></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="trust">
-  <div class="wrap">
-    <div class="trust-item"><strong>48hr</strong> average first-draft turnaround</div>
-    <div class="trust-item"><strong>100%</strong> mobile-optimized builds</div>
-    <div class="trust-item"><strong>$20/mo</strong> flat hosting & support</div>
-    <div class="trust-item"><strong>1</strong> designer, no outsourcing</div>
-  </div>
-</div>
-
-<section id="services">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">What I do</div>
-      <h2>Everything your business needs to show up online, done right.</h2>
-      <p>Every project is built by hand — no drag-and-drop templates, no recycled themes. Just clean code and a site that's actually yours.</p>
+<section class="sec" id="reviews">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-index mono">04 — Reviews</div>
+      <div><h2>Client feedback, as it comes in.</h2></div>
     </div>
-    <div class="services-grid reveal">
-      <div class="service">
-        <div class="num">01</div>
-        <h3>Custom Design</h3>
-        <p>A site built around your brand and your customers — not a template with your logo dropped in.</p>
-      </div>
-      <div class="service">
-        <div class="num">02</div>
-        <h3>Development</h3>
-        <p>Hand-coded, fast-loading pages that work perfectly on phones, tablets, and desktops alike.</p>
-      </div>
-      <div class="service">
-        <div class="num">03</div>
-        <h3>Hosting & Domain</h3>
-        <p>I handle the technical setup — domain connection, hosting, and SSL — so you don't have to.</p>
-      </div>
-      <div class="service">
-        <div class="num">04</div>
-        <h3>Ongoing Support</h3>
-        <p>Need a copy change or a new photo swapped in? Updates are included, not billed hourly.</p>
-      </div>
-      <div class="service">
-        <div class="num">05</div>
-        <h3>SEO Basics</h3>
-        <p>Pages are structured so Google can actually find and understand your business.</p>
-      </div>
-      <div class="service">
-        <div class="num">06</div>
-        <h3>Analytics</h3>
-        <p>See exactly how many people visit your site and where they're coming from.</p>
+    <div class="review reveal">
+      <div></div>
+      <div>
+        <blockquote>"RD Design Co. is newly launched — real client reviews will show up here as projects wrap. If you're one of the first, your feedback becomes the first thing people see."</blockquote>
+        <div class="who">— RICHKARDE DORSAINVIL, FOUNDER</div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="process">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">How it works</div>
-      <h2>From first call to live site, in four steps.</h2>
-    </div>
-    <div class="process-list reveal">
-      <div class="process-item">
-        <div class="process-num">01</div>
-        <h3>Discovery call</h3>
-        <p>A quick conversation about your business, your customers, and what the site needs to do.</p>
-      </div>
-      <div class="process-item">
-        <div class="process-num">02</div>
-        <h3>Design draft</h3>
-        <p>You'll see a real working preview within 48 hours — not a mockup, an actual page you can click through.</p>
-      </div>
-      <div class="process-item">
-        <div class="process-num">03</div>
-        <h3>Revisions</h3>
-        <p>We refine it together until it feels exactly right — copy, layout, colors, all of it.</p>
-      </div>
-      <div class="process-item">
-        <div class="process-num">04</div>
-        <h3>Launch & support</h3>
-        <p>Your site goes live on your domain, and I stay on for hosting, updates, and questions after.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="work">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Recent work</div>
-      <h2>A few examples of what's possible.</h2>
-      <p>Every project starts from scratch — these are the kinds of businesses I build for.</p>
-    </div>
-    <div class="work-grid reveal">
-      <div class="work-card">
-        <div class="work-thumb"><span>Barbershop</span></div>
-        <div class="work-info">
-          <div class="tag">Local service</div>
-          <h3>Booking-first landing page</h3>
-          <p>Built to turn Instagram followers into booked appointments.</p>
-        </div>
-      </div>
-      <div class="work-card">
-        <div class="work-thumb"><span>Cleaning Co.</span></div>
-        <div class="work-info">
-          <div class="tag">Home services</div>
-          <h3>Quote request funnel</h3>
-          <p>A simple form and clear pricing that gets quote requests same-day.</p>
-        </div>
-      </div>
-      <div class="work-card">
-        <div class="work-thumb"><span>Café</span></div>
-        <div class="work-info">
-          <div class="tag">Food & beverage</div>
-          <h3>Menu & location page</h3>
-          <p>Fast-loading menu built for people searching on their phone, nearby.</p>
-        </div>
-      </div>
-      <div class="work-card">
-        <div class="work-thumb"><span>Studio</span></div>
-        <div class="work-info">
-          <div class="tag">Creative</div>
-          <h3>Portfolio & inquiry site</h3>
-          <p>A visual-first layout designed to make the work speak first.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="pricing">
-  <div class="wrap">
-    <div class="pricing-wrap reveal">
-      <div class="section-head">
-        <div class="eyebrow">Pricing</div>
+<section class="sec" id="pricing">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-index mono">05 — Pricing</div>
+      <div>
         <h2>Straightforward pricing, no surprise invoices.</h2>
-        <p>One flat monthly rate covers hosting, support, and updates — after the one-time build.</p>
+        <p>One flat build fee, then a flat monthly rate for hosting and support. No contracts.</p>
       </div>
-      <div class="price-grid">
-        <div class="price-card">
-          <h3>Starter Build</h3>
-          <div class="price-amount">$0<span>&nbsp;setup, when bundled</span></div>
-          <ul>
-            <li>Single-page custom website</li>
-            <li>Mobile-optimized design</li>
-            <li>Domain connection</li>
-            <li>Launch within 5–7 days</li>
-          </ul>
-          <a href="#contact" class="btn btn-primary" style="background:#1c1c1c;color:#fff;">Get started</a>
+    </div>
+    <div class="spec reveal">
+      <div></div>
+      <div>
+        <div class="spec-row">
+          <div><h3>Website Build</h3><div class="desc">Custom-designed, mobile-optimized website with domain connection, launched within 5–7 days.</div></div>
+          <div class="price">$500<span> one-time</span></div>
+          <a href="#start" class="btn btn-primary">Start →</a>
         </div>
-        <div class="price-card featured">
-          <span class="badge">Most common</span>
-          <h3>Hosting & Support</h3>
-          <div class="price-amount">$20<span>&nbsp;/ month</span></div>
-          <ul>
-            <li>Hosting, domain & SSL included</li>
-            <li>Unlimited content updates</li>
-            <li>Priority response on changes</li>
-            <li>Cancel anytime, no contract</li>
-          </ul>
-          <a href="#contact" class="btn btn-primary">Start a project</a>
+        <div class="spec-row">
+          <div><h3>Hosting & Support</h3><div class="desc">Hosting, domain, SSL, and ongoing content updates. Required after launch, cancel anytime.</div></div>
+          <div class="price">$20<span> / month</span></div>
+          <a href="#start" class="btn btn-ghost">Start →</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="contact" id="contact">
-  <div class="wrap contact-grid">
-    <div class="reveal">
-      <div class="eyebrow">Get in touch</div>
-      <h2>Let's build something worth clicking on.</h2>
-      <p class="lead">Tell me a bit about your business and what you need. I'll follow up within a day with next steps.</p>
-
-      <div class="contact-detail">
-        <span class="label">Email</span>
-        <a href="mailto:hello@rdwebstudio.com">hello@rdwebstudio.com</a>
-      </div>
-      <div class="contact-detail">
-        <span class="label">Based in</span>
-        <span>United States · Working with clients everywhere</span>
-      </div>
-      <div class="contact-detail">
-        <span class="label">Response time</span>
-        <span>Within 24 hours</span>
+<section class="sec" id="start">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-index mono">06 — Contact</div>
+      <div>
+        <h2>Tell me about your business.</h2>
+        <p>The more I know upfront, the faster I can get you an accurate quote and timeline. I follow up within 24 hours.</p>
       </div>
     </div>
-
-    <form action="mailto:hello@rdwebstudio.com" method="POST" enctype="text/plain" class="reveal">
-      <div class="field">
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text" required placeholder="Your name">
-      </div>
-      <div class="field">
-        <label for="business">Business name</label>
-        <input id="business" name="business" type="text" placeholder="What's the business called?">
-      </div>
-      <div class="field">
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required placeholder="you@business.com">
-      </div>
-      <div class="field">
-        <label for="message">What do you need?</label>
-        <textarea id="message" name="message" placeholder="Tell me about your business and what the site needs to do."></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">Send message →</button>
-      <p class="form-note">Opens your email app to send — replace with a real form service (like Formspree) once you're ready to collect leads directly.</p>
-    </form>
+    <div class="intake reveal">
+      <div class="intake-copy"><p>Most projects launch within a week of kickoff. No obligation to start the conversation.</p></div>
+      <form action="mailto:hello@rddesignco.com" method="POST" enctype="text/plain">
+        <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" required placeholder="Your name"></div>
+        <div class="field"><label for="business">Business name</label><input id="business" name="business" type="text" placeholder="What's it called?"></div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required placeholder="you@business.com"></div>
+        <div class="field">
+          <label for="timeline">Timeline</label>
+          <select id="timeline" name="timeline">
+            <option>As soon as possible</option>
+            <option>Within a month</option>
+            <option>Just exploring</option>
+          </select>
+        </div>
+        <div class="field full"><label for="message">What does your business need?</label><textarea id="message" name="message" placeholder="Tell me what the site needs to do."></textarea></div>
+        <button type="submit" class="btn btn-primary">Send request →</button>
+        <p class="form-note">Opens your email app to send. Swap this for a Formspree endpoint once you're ready to collect leads directly.</p>
+      </form>
+    </div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap footer-row">
-    <span>© <span id="year"></span> RD Web Studio. Built by Richkarde Dorsainvil.</span>
-    <div style="display:flex;gap:24px;">
-      <a href="mailto:hello@rdwebstudio.com">Email</a>
-      <a href="#top">Back to top</a>
-    </div>
+  <div class="container footer-row">
+    <span>© <span id="year"></span> RD Design Co. Built by Richkarde Dorsainvil.</span>
+    <a href="#top">Back to top</a>
   </div>
 </footer>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  const menuBtn = document.querySelector('.menu-btn');
-  const navLinks = document.querySelector('.nav-links');
-  menuBtn?.addEventListener('click', () => {
-    const open = navLinks.style.display === 'flex';
-    navLinks.style.display = open ? 'none' : 'flex';
-    navLinks.style.flexDirection = 'column';
-    navLinks.style.position = 'absolute';
-    navLinks.style.top = '68px';
-    navLinks.style.right = '20px';
-    navLinks.style.background = 'rgba(11,14,20,0.97)';
-    navLinks.style.border = '1px solid var(--line)';
-    navLinks.style.borderRadius = '12px';
-    navLinks.style.padding = '20px';
-    navLinks.style.gap = '18px';
-  });
-
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.15 });
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
   revealEls.forEach(el => io.observe(el));
+
+  const messageField = document.getElementById('message');
+  document.querySelectorAll('.glass-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.template-card');
+      const status = card.querySelector('.template-status');
+      const style = btn.dataset.style;
+      if(btn.classList.contains('yes')){
+        status.textContent = "Added to your quote request ↓";
+        if(messageField && !messageField.value.includes(style)){
+          messageField.value = (messageField.value ? messageField.value + " " : "") + `I like the "${style}" style.`;
+        }
+        document.getElementById('start').scrollIntoView({behavior:'smooth', block:'start'});
+      } else {
+        status.textContent = "No worries — try another";
+      }
+      status.classList.add('show');
+      setTimeout(() => status.classList.remove('show'), 3200);
+    });
+  });
 </script>
 
 </body>
