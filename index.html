@@ -163,7 +163,16 @@
   .reveal{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
   .reveal.in{ opacity:1; transform:translateY(0); }
   @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
-  @media (max-width:720px){ .nav-links{ display:none; } .menu-btn{ display:block; } }
+  @media (max-width:720px){
+    .nav-links{ display:none; }
+    .menu-btn{ display:block; }
+    .nav-links.mobile-open{
+      display:flex; flex-direction:column; gap:16px;
+      position:absolute; top:60px; right:20px; left:20px;
+      background:var(--bg); border:1px solid var(--line); border-radius:12px;
+      padding:20px; box-shadow:0 20px 50px -20px rgba(0,0,0,0.2);
+    }
+  }
 </style>
 </head>
 <body>
@@ -371,6 +380,19 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  const menuBtn = document.querySelector('.menu-btn');
+  const navLinks = document.querySelector('.nav-links');
+  menuBtn?.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('mobile-open');
+    menuBtn.textContent = isOpen ? 'Close' : 'Menu';
+  });
+  navLinks?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('mobile-open');
+      menuBtn.textContent = 'Menu';
+    });
+  });
 
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
