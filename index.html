@@ -368,8 +368,8 @@
         <button id="submit-payment" class="btn btn-primary" type="submit" style="margin-top:20px;">
           <span id="button-text">Pay $30</span>
         </button>
-        <div id="payment-message" class="payment-message" style="display:none;"></div>
       </form>
+      <div id="payment-message" class="payment-message" style="display:none;"></div>
       <div id="payment-success" style="display:none;">
         <h3>You're set.</h3>
         <p>Your $30 deposit went through. I'll follow up within 24 hours to kick off your design.</p>
@@ -435,10 +435,13 @@
   startBtn?.addEventListener('click', async () => {
     startBtn.disabled = true;
     startBtn.textContent = "Loading...";
+    messageBox.style.display = 'none';
     try {
       const res = await fetch('/api/create-payment-intent', { method: 'POST' });
       const data = await res.json();
+      console.log('create-payment-intent response:', data);
       if (data.error) throw new Error(data.error);
+      if (!data.clientSecret) throw new Error('No clientSecret returned from server.');
 
       elements = stripe.elements({ clientSecret: data.clientSecret });
       const paymentElement = elements.create('payment');
@@ -447,9 +450,10 @@
       idleBox.style.display = 'none';
       form.style.display = 'block';
     } catch (err) {
+      console.error('Deposit payment error:', err);
       startBtn.disabled = false;
       startBtn.textContent = "Pay $30 Design Deposit";
-      messageBox.textContent = "Something went wrong loading the payment form. Please try again.";
+      messageBox.textContent = "Error: " + err.message;
       messageBox.style.display = 'block';
     }
   });
