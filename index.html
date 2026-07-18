@@ -79,7 +79,6 @@
   .work-row .arrow{ font-size:20px; opacity:0.3; transition:opacity .2s, transform .2s; }
   .work-row:hover .arrow{ opacity:1; transform:translateX(4px); color:var(--accent); }
 
-  /* ===== LIQUID GLASS — template preview section ===== */
   .glass-stage{
     background:linear-gradient(150deg, #EDEAE0, #F7F5EE 55%, #E7E9E2);
     border-radius:24px; padding:56px 44px; position:relative; overflow:hidden;
@@ -166,6 +165,19 @@
   #payment-success h3{ font-size:22px; margin-bottom:8px; }
   #payment-success p{ color:var(--ink-soft); font-size:14.5px; }
 
+  .locked-box{
+    border:1px dashed var(--line); border-radius:16px; padding:44px; max-width:640px;
+    display:flex; flex-direction:column; gap:14px; align-items:flex-start;
+  }
+  .locked-box .lock-icon{ font-size:26px; }
+  .locked-box h3{ font-size:20px; }
+  .locked-box p{ color:var(--ink-soft); font-size:14.5px; max-width:440px; }
+  .locked-box .btn{ margin-top:8px; }
+  .form-success-msg{ display:none; }
+  .form-success-msg.show{ display:block; }
+  .form-error-msg{ display:none; margin-top:14px; font-size:13.5px; color:#B23B3B; }
+  .form-error-msg.show{ display:block; }
+
   footer{ border-top:1px solid var(--line); padding:36px 0; }
   .footer-row{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; font-size:13px; color:var(--ink-soft); }
   .footer-row a:hover{ color:var(--accent); }
@@ -195,7 +207,7 @@
       <a href="#templates">Preview a template</a>
       <a href="#pricing">Pricing</a>
       <a href="#reviews">Reviews</a>
-      <a href="#start" class="cta">Get a quote →</a>
+      <a href="#deposit" class="cta">Get a quote →</a>
     </div>
     <button class="menu-btn">Menu</button>
   </nav>
@@ -338,12 +350,12 @@
         <div class="spec-row">
           <div><h3>Website Build</h3><div class="desc">Custom-designed, mobile-optimized website with domain connection, launched within 5–7 days.</div></div>
           <div class="price">$500<span> one-time</span></div>
-          <a href="#start" class="btn btn-primary">Start →</a>
+          <a href="#deposit" class="btn btn-primary">Start →</a>
         </div>
         <div class="spec-row">
           <div><h3>Hosting & Support</h3><div class="desc">Hosting, domain, SSL, and ongoing content updates. Required after launch, cancel anytime.</div></div>
           <div class="price">$20<span> / month</span></div>
-          <a href="#start" class="btn btn-ghost">Start →</a>
+          <a href="#deposit" class="btn btn-ghost">Start →</a>
         </div>
       </div>
     </div>
@@ -356,7 +368,7 @@
       <div class="sec-index mono">06 — Get started</div>
       <div>
         <h2>Pay a $30 design deposit to begin.</h2>
-        <p>This isn't a reservation — it's a deposit that starts your custom design work. If you decide not to move forward once you see it, it's refundable.</p>
+        <p>This isn't a reservation — it's a deposit that starts your custom design work. Once it's paid, you'll unlock the form below to tell me about your business. If you decide not to move forward once you see it, it's refundable.</p>
       </div>
     </div>
     <div class="deposit-box reveal">
@@ -372,7 +384,7 @@
       <div id="payment-message" class="payment-message" style="display:none;"></div>
       <div id="payment-success" style="display:none;">
         <h3>You're set.</h3>
-        <p>Your $30 deposit went through. I'll follow up within 24 hours to kick off your design.</p>
+        <p>Your $30 deposit went through. Scroll down to tell me about your business — I'll follow up within 24 hours.</p>
       </div>
     </div>
   </div>
@@ -381,15 +393,23 @@
 <section class="sec" id="start">
   <div class="container">
     <div class="sec-head">
-      <div class="sec-index mono">06 — Contact</div>
+      <div class="sec-index mono">07 — Contact</div>
       <div>
         <h2>Tell me about your business.</h2>
         <p>The more I know upfront, the faster I can get you an accurate quote and timeline. I follow up within 24 hours.</p>
       </div>
     </div>
     <div class="intake reveal">
-      <div class="intake-copy"><p>Most projects launch within a week of kickoff. No obligation to start the conversation.</p></div>
-      <form action="mailto:hello@rddesignco.com" method="POST" enctype="text/plain">
+      <div class="intake-copy"><p>Most projects launch within a week of kickoff. This form unlocks automatically once your $30 deposit is paid above.</p></div>
+
+      <div id="contact-locked" class="locked-box">
+        <div class="lock-icon">🔒</div>
+        <h3>Pay your deposit to unlock this form</h3>
+        <p>Once your $30 design deposit above goes through, this section unlocks so you can tell me about your business.</p>
+        <a href="#deposit" class="btn btn-primary">Go to deposit →</a>
+      </div>
+
+      <form id="intake-form" style="display:none;">
         <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" required placeholder="Your name"></div>
         <div class="field"><label for="business">Business name</label><input id="business" name="business" type="text" placeholder="What's it called?"></div>
         <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required placeholder="you@business.com"></div>
@@ -402,9 +422,14 @@
           </select>
         </div>
         <div class="field full"><label for="message">What does your business need?</label><textarea id="message" name="message" placeholder="Tell me what the site needs to do."></textarea></div>
-        <button type="submit" class="btn btn-primary">Send request →</button>
-        <p class="form-note">Opens your email app to send. Swap this for a Formspree endpoint once you're ready to collect leads directly.</p>
+        <button type="submit" class="btn btn-primary" id="intake-submit-btn">Send request →</button>
+        <p class="form-note">Submits securely and directly — no email app required.</p>
       </form>
+      <div id="intake-success" class="form-success-msg">
+        <h3 style="font-family:'Fraunces',serif; font-size:20px; margin-bottom:6px;">Request sent.</h3>
+        <p style="color:var(--ink-soft); font-size:14.5px;">Thanks — I'll follow up within 24 hours.</p>
+      </div>
+      <div id="intake-error" class="form-error-msg"></div>
     </div>
   </div>
 </section>
@@ -420,7 +445,6 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // ===== Deposit payment flow =====
   const STRIPE_PUBLISHABLE_KEY = "pk_live_51TtwxmJu7zS9Vbkd0yvp0pFz7QZ2QXs8An2UVAMg1FXewCADXbiH7a8G94zVuDFeNv4UM7CHKrcg9RVhmiBYBuQq00PfssVx3e";
   const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
   let elements;
@@ -432,6 +456,25 @@
   const messageBox = document.getElementById('payment-message');
   const submitBtn = document.getElementById('submit-payment');
 
+  const contactLocked = document.getElementById('contact-locked');
+  const intakeForm = document.getElementById('intake-form');
+  const intakeSuccess = document.getElementById('intake-success');
+  const intakeError = document.getElementById('intake-error');
+
+  const DEPOSIT_PAID_KEY = 'rdDesignCoDepositPaid';
+
+  function unlockContactForm(){
+    contactLocked.style.display = 'none';
+    intakeForm.style.display = 'grid';
+    try { sessionStorage.setItem(DEPOSIT_PAID_KEY, 'true'); } catch(e){}
+  }
+
+  try {
+    if (sessionStorage.getItem(DEPOSIT_PAID_KEY) === 'true') {
+      unlockContactForm();
+    }
+  } catch(e){}
+
   startBtn?.addEventListener('click', async () => {
     startBtn.disabled = true;
     startBtn.textContent = "Loading...";
@@ -439,7 +482,6 @@
     try {
       const res = await fetch('/api/create-payment-intent', { method: 'POST' });
       const data = await res.json();
-      console.log('create-payment-intent response:', data);
       if (data.error) throw new Error(data.error);
       if (!data.clientSecret) throw new Error('No clientSecret returned from server.');
 
@@ -461,7 +503,8 @@
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     submitBtn.disabled = true;
-    submitBtn.querySelector('#button-text') ? submitBtn.querySelector('#button-text').textContent = "Processing..." : null;
+    const btnText = submitBtn.querySelector('#button-text');
+    if (btnText) btnText.textContent = "Processing...";
 
     const { error } = await stripe.confirmPayment({
       elements,
@@ -472,10 +515,45 @@
       messageBox.textContent = error.message;
       messageBox.style.display = 'block';
       submitBtn.disabled = false;
-      document.getElementById('button-text').textContent = "Pay $30";
+      if (btnText) btnText.textContent = "Pay $30";
     } else {
       form.style.display = 'none';
       successBox.style.display = 'block';
+      unlockContactForm();
+    }
+  });
+
+  // 1. Go to https://formspree.io and create a free account
+  // 2. Create a new form, it gives you a URL like https://formspree.io/f/abcdwxyz
+  // 3. Paste that full URL below, replacing the placeholder
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
+  const intakeFormEl = document.getElementById('intake-form');
+  intakeFormEl?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('intake-submit-btn');
+    btn.disabled = true;
+    btn.textContent = "Sending...";
+    intakeError.classList.remove('show');
+
+    try {
+      const formData = new FormData(intakeFormEl);
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        intakeFormEl.style.display = 'none';
+        intakeSuccess.classList.add('show');
+      } else {
+        throw new Error('Could not send. Please try again.');
+      }
+    } catch (err) {
+      intakeError.textContent = "Error: " + err.message;
+      intakeError.classList.add('show');
+      btn.disabled = false;
+      btn.textContent = "Send request →";
     }
   });
 
@@ -505,11 +583,11 @@
       const status = card.querySelector('.template-status');
       const style = btn.dataset.style;
       if(btn.classList.contains('yes')){
-        status.textContent = "Added to your quote request ↓";
+        status.textContent = "Noted — pay your deposit below to send it along ↓";
         if(messageField && !messageField.value.includes(style)){
           messageField.value = (messageField.value ? messageField.value + " " : "") + `I like the "${style}" style.`;
         }
-        document.getElementById('start').scrollIntoView({behavior:'smooth', block:'start'});
+        document.getElementById('deposit').scrollIntoView({behavior:'smooth', block:'start'});
       } else {
         status.textContent = "No worries — try another";
       }
