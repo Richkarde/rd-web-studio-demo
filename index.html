@@ -156,6 +156,16 @@
   .form-note{ grid-column:1/-1; font-size:12px; color:var(--mist); }
   @media (max-width:760px){ .sec-head,.review,.spec,.intake{ grid-template-columns:1fr; } form{ grid-template-columns:1fr; } }
 
+  .deposit-box{
+    border:1px solid var(--line); border-radius:16px; padding:44px; max-width:520px;
+  }
+  .deposit-box #payment-element{ margin-bottom:0; }
+  .payment-message{ margin-top:14px; font-size:13.5px; color:#B23B3B; }
+  #submit-payment{ width:100%; justify-content:center; cursor:pointer; border-color:var(--ink); }
+  #submit-payment:disabled{ opacity:0.5; cursor:not-allowed; }
+  #payment-success h3{ font-size:22px; margin-bottom:8px; }
+  #payment-success p{ color:var(--ink-soft); font-size:14.5px; }
+
   footer{ border-top:1px solid var(--line); padding:36px 0; }
   .footer-row{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; font-size:13px; color:var(--ink-soft); }
   .footer-row a:hover{ color:var(--accent); }
@@ -340,6 +350,34 @@
   </div>
 </section>
 
+<section class="sec" id="deposit">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-index mono">06 — Get started</div>
+      <div>
+        <h2>Pay a $30 design deposit to begin.</h2>
+        <p>This isn't a reservation — it's a deposit that starts your custom design work. If you decide not to move forward once you see it, it's refundable.</p>
+      </div>
+    </div>
+    <div class="deposit-box reveal">
+      <div id="deposit-idle">
+        <button id="start-deposit-btn" class="btn btn-primary">Pay $30 Design Deposit</button>
+      </div>
+      <form id="payment-form" style="display:none;">
+        <div id="payment-element"></div>
+        <button id="submit-payment" class="btn btn-primary" type="submit" style="margin-top:20px;">
+          <span id="button-text">Pay $30</span>
+        </button>
+        <div id="payment-message" class="payment-message" style="display:none;"></div>
+      </form>
+      <div id="payment-success" style="display:none;">
+        <h3>You're set.</h3>
+        <p>Your $30 deposit went through. I'll follow up within 24 hours to kick off your design.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="start">
   <div class="container">
     <div class="sec-head">
@@ -378,8 +416,64 @@
   </div>
 </footer>
 
+<script src="https://js.stripe.com/v3/"></script>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ===== Deposit payment flow =====
+  const STRIPE_PUBLISHABLE_KEY = "pk_test_51TtwxyFbdIA4NNAN35d0dTk8cglMVJSKvNphbflVI9ss6m7PcnbKQa62b0FtAMvcaaTzw0CiDZa6lTlHynhJBsfS00MxSsnn1w";
+  const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+  let elements;
+
+  const startBtn = document.getElementById('start-deposit-btn');
+  const idleBox = document.getElementById('deposit-idle');
+  const form = document.getElementById('payment-form');
+  const successBox = document.getElementById('payment-success');
+  const messageBox = document.getElementById('payment-message');
+  const submitBtn = document.getElementById('submit-payment');
+
+  startBtn?.addEventListener('click', async () => {
+    startBtn.disabled = true;
+    startBtn.textContent = "Loading...";
+    try {
+      const res = await fetch('/api/create-payment-intent', { method: 'POST' });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+
+      elements = stripe.elements({ clientSecret: data.clientSecret });
+      const paymentElement = elements.create('payment');
+      paymentElement.mount('#payment-element');
+
+      idleBox.style.display = 'none';
+      form.style.display = 'block';
+    } catch (err) {
+      startBtn.disabled = false;
+      startBtn.textContent = "Pay $30 Design Deposit";
+      messageBox.textContent = "Something went wrong loading the payment form. Please try again.";
+      messageBox.style.display = 'block';
+    }
+  });
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.querySelector('#button-text') ? submitBtn.querySelector('#button-text').textContent = "Processing..." : null;
+
+    const { error } = await stripe.confirmPayment({
+      elements,
+      redirect: 'if_required',
+    });
+
+    if (error) {
+      messageBox.textContent = error.message;
+      messageBox.style.display = 'block';
+      submitBtn.disabled = false;
+      document.getElementById('button-text').textContent = "Pay $30";
+    } else {
+      form.style.display = 'none';
+      successBox.style.display = 'block';
+    }
+  });
 
   const menuBtn = document.querySelector('.menu-btn');
   const navLinks = document.querySelector('.nav-links');
